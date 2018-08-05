@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Yoav's UW2 Test Page</title>
+
+    <script src="https://widget.cloudinary.com/v2.0/next/global/all.js" ></script>
+</head>
+
+<body>
+
+
+<footer>
+    <div id="widget-version">loading...</div>
+</footer>
+
+
+<script>
+        //intentionally using es5 to check old browsers too
+    (function(){
+
+    	const wv = document.querySelector("#widget-version");
+    	wv.textContent = "UW Version: " + cloudinary.WIDGET_VERSION;
+
+    	var config = {
+		    cloudName: "hzxyensd5",
+		    uploadPreset: "aoh4fpwm",
+		    googleApiKey: "AIzaSyAugh8ddeFTt5ckj9rFcRKNHxem18hKiRo",
+		    secure: true,
+		    folder: "uw2-public-demo-app"
+        };
+
+    	cloudinary.openUploadWidget(config);
+    })();
+
+</script>
+
+</body>
+</html>
