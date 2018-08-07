@@ -6,11 +6,34 @@
     <title>Yoav's UW2 Test Page</title>
 
     <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.js"></script>
-    <script src="https://widget.cloudinary.com/v2.0/next/global/all.js" ></script>
+    <!--<script src="https://widget.cloudinary.com/v2.0/next/global/all.js" ></script>-->
+
+    <style type="text/css">
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 2px;
+            left: 1px;
+        }
+
+        #open-uw {
+            margin: 20px;
+            padding: 10px;
+        }
+    </style>
 </head>
+
 
 <body>
 
+<button id="open-uw">Open</button>
 
 <footer>
     <div id="widget-version">loading...</div>
@@ -18,25 +41,52 @@
 
 
 <script>
-        //intentionally using es5 to check old browsers too
-    (function(){
+	//!!!!!!! intentionally using es5 to check old browsers too !!!!!!!!!!!
+	(function () {
+		var widget = null,
+			isDev = ~document.location.search.indexOf("dev");
 
-    	const wv = document.querySelector("#widget-version");
-    	wv.textContent = "UW Version: " + cloudinary.WIDGET_VERSION;
+		function onCloudinaryLoaded() {
+			var wv = document.querySelector("#widget-version");
+			wv.textContent = "UW Version: " + cloudinary.WIDGET_VERSION;
 
-    	var config = {
-		    cloudName: "hzxyensd5",
-		    uploadPreset: "aoh4fpwm",
-		    googleApiKey: "AIzaSyAugh8ddeFTt5ckj9rFcRKNHxem18hKiRo",
-		    secure: true,
-		    folder: "uw2-public-demo-app",
-            showAdvancedOptions: true,
-		    searchBySites: "all",
-		    searchByRights: true
-        };
+			var config = {
+				cloudName: "hzxyensd5",
+				uploadPreset: "aoh4fpwm",
+				googleApiKey: "AIzaSyAugh8ddeFTt5ckj9rFcRKNHxem18hKiRo",
+				secure: true,
+				folder: "uw2-public-demo-app",
+				showAdvancedOptions: true,
+				searchBySites: "all",
+				searchByRights: true
+			};
 
-    	cloudinary.openUploadWidget(config);
-    })();
+			if (isDev) {
+				config.cloudName = "yoav";
+				config.uploadPreset = "uw_usigned";
+				config.secureDistribution = "res-dev.cloudinary.com";
+				config.widgetHost = "http://localhost:9990";
+			}
+
+			widget = cloudinary.openUploadWidget(config);
+
+			document.querySelector("#open-uw")
+				.addEventListener("click", function () {
+					if (widget) {
+						widget.open();
+					}
+				});
+		}
+
+
+		var script = document.createElement("script");
+		script.onload = onCloudinaryLoaded;
+		script.src = isDev ? "http://localhost:9990/global/all.js" :
+			"https://widget.cloudinary.com/v2.0/next/global/all.js";
+
+		document.head.appendChild(script);
+
+	})();
 
 </script>
 
