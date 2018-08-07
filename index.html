@@ -44,7 +44,17 @@
 	//!!!!!!! intentionally using es5 to check old browsers too !!!!!!!!!!!
 	(function () {
 		var widget = null,
-			isDev = ~document.location.search.indexOf("dev");
+			isDev = ~document.location.search.indexOf("dev"),
+			localDomain = null;
+
+		function getLocalHost() {
+			if (!localDomain) {
+				var m = /domain=([\w\d]*)/.exec(document.location.search);
+				localDomain = m && m[1] ? "https://" + m[1] + ".ngrok.io" : "http://localhost:9990";
+			}
+
+			return localDomain
+		}
 
 		function onCloudinaryLoaded() {
 			var wv = document.querySelector("#widget-version");
@@ -65,7 +75,8 @@
 				config.cloudName = "yoav";
 				config.uploadPreset = "uw_usigned";
 				config.secureDistribution = "res-dev.cloudinary.com";
-				config.widgetHost = "http://localhost:9990";
+				config.dev = true;
+				// config.widgetHost = getLocalHost();
 			}
 
 			widget = cloudinary.openUploadWidget(config);
@@ -78,10 +89,9 @@
 				});
 		}
 
-
 		var script = document.createElement("script");
 		script.onload = onCloudinaryLoaded;
-		script.src = isDev ? "http://localhost:9990/global/all.js" :
+		script.src = isDev ? getLocalHost() + "/global/all.js" :
 			"https://widget.cloudinary.com/v2.0/next/global/all.js";
 
 		document.head.appendChild(script);
