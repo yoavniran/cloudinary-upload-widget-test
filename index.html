@@ -44,6 +44,7 @@
 	//!!!!!!! intentionally using es5 to check old browsers too !!!!!!!!!!!
 	(function () {
 		var widget = null,
+		        isProd = ~document.location.search.indexOf("prod"),
 			isDev = ~document.location.search.indexOf("dev"),
 			localDomain = null;
 
@@ -92,6 +93,7 @@
 		var script = document.createElement("script");
 		script.onload = onCloudinaryLoaded;
 		script.src = isDev ? getLocalHost() + "/global/all.js" :
+			isProd ? "https://widget.cloudinary.com/v2.0/global/all.js" : 
 			"https://widget.cloudinary.com/v2.0/next/global/all.js";
 
 		document.head.appendChild(script);
