@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="https://media-library.cloudinary.com/global/all.js"></script>
+
+</head>
+<body>
+
+<div class="cms-container"></div>
+
+<script>
+
+	cloudinary.openMediaLibrary({
+			cloud_name: 'yoav-cloud',
+			api_key: '756447568795182',
+			username: 'yoav@cloudinary.com',
+			inline_container: '.cms-container',
+			insert_transformation: false,
+			multiple: false
+		},{
+			insertHandler: function (data) {
+				// data.assets.forEach(asset => console.log("Inserted asset:", JSON.stringify(asset, null, 2)))
+			}
+		}
+	);
+</script>
+
+</body>
+</html>
