@@ -45,6 +45,7 @@
 	(function () {
 		var widget = null,
 		        isProd = ~document.location.search.indexOf("prod"),
+		        isStaging = ~document.location.search.indexOf("staging"),
 			isDev = ~document.location.search.indexOf("dev"),
 			localDomain = null;
 
@@ -72,13 +73,18 @@
 				searchByRights: true
 			};
 
+//			if (isStaging) {
+//				config.cloudName = "yoav";
+//				config.uploadPreset = "uw_usigned";
+//			}
+//			else 
 			if (isDev) {
 				config.cloudName = "yoav";
 				config.uploadPreset = "uw_usigned";
 				config.secureDistribution = "res-dev.cloudinary.com";
 				// config.dev = true;
 				config.widgetHost = getLocalHost();
-			}
+			}	
 
 			widget = cloudinary.openUploadWidget(config);
 
@@ -94,6 +100,7 @@
 		script.onload = onCloudinaryLoaded;
 		script.src = isDev ? getLocalHost() + "/global/all.js" :
 			isProd ? "https://widget.cloudinary.com/v2.0/global/all.js" : 
+		        isStaging ? "https://widget-staging.cloudinary.com/v2.0/global/all.js" : 
 			"https://widget.cloudinary.com/v2.0/next/global/all.js";
 
 		document.head.appendChild(script);
