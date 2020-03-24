@@ -73,11 +73,12 @@
 				searchByRights: true
 			};
 
-//			if (isStaging) {
-//				config.cloudName = "yoav";
-//				config.uploadPreset = "uw_usigned";
-//			}
-//			else 
+			if (isStaging) {
+				//config.cloudName = "yoav";
+				//config.uploadPreset = "uw_usigned";
+				config.widgetHost = "https://widget-staging.cloudinary.com/"
+			}
+			else 
 			if (isDev) {
 				config.cloudName = "yoav";
 				config.uploadPreset = "uw_usigned";
