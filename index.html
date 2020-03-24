@@ -76,10 +76,9 @@
 			if (isStaging) {
 				//config.cloudName = "yoav";
 				//config.uploadPreset = "uw_usigned";
-				config.widgetHost = "https://widget-staging.cloudinary.com/"
+				config.staging  = true; //widgetHost = "https://widget-staging.cloudinary.com/"
 			}
-			else 
-			if (isDev) {
+			else if (isDev) {
 				config.cloudName = "yoav";
 				config.uploadPreset = "uw_usigned";
 				config.secureDistribution = "res-dev.cloudinary.com";
