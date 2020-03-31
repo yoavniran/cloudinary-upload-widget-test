@@ -43,35 +43,33 @@
 	//!!!!!!! intentionally using es5 to check old browsers too !!!!!!!!!!!
 	(function () {
 		var widget = null;
-
 		
-			var wv = document.querySelector("#widget-version");
-			wv.textContent = "UW Version: " + cloudinary.WIDGET_VERSION;
+		var wv = document.querySelector("#widget-version");
+		wv.textContent = "UW Version: " + cloudinary.WIDGET_VERSION;
 
-			var config = {
-				cloudName: "hzxyensd5",
-				uploadPreset: "aoh4fpwm",
-				googleApiKey: "AIzaSyAugh8ddeFTt5ckj9rFcRKNHxem18hKiRo",
-				secure: true,
-				folder: "uw2-public-demo-app",
-				showAdvancedOptions: true,
-				searchBySites: "all",
-				searchByRights: true,
-				widgetBase: "https://widget-nightly.cloudinary.com/",
-				instagramServer: "https://nightly.cloudinary.com/console/api/v1/integration/"
-			};
-			
-			widget = cloudinary.openUploadWidget(config);
+		var config = {
+			cloudName: "hzxyensd5",
+			uploadPreset: "aoh4fpwm",
+			googleApiKey: "AIzaSyAugh8ddeFTt5ckj9rFcRKNHxem18hKiRo",
+			secure: true,
+			folder: "uw2-public-demo-app",
+			showAdvancedOptions: true,
+			searchBySites: "all",
+			searchByRights: true,
+			widgetBase: "https://widget-nightly.cloudinary.com/",
+			instagramServer: "https://nightly.cloudinary.com/console/api/v1/integration/"
+		};
 
-			document.querySelector("#open-uw")
-				.addEventListener("click", function () {
-					if (widget) {
-						widget.open();
-					}
-				});
+		widget = cloudinary.openUploadWidget(config);
+
+		document.querySelector("#open-uw")
+			.addEventListener("click", function () {
+				if (widget) {
+					widget.open();
+				}
+			});
 		
 	})();
-
 </script>
 
 </body>
