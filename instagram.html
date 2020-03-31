@@ -43,16 +43,18 @@
 	//!!!!!!! intentionally using es5 to check old browsers too !!!!!!!!!!!
 	(function () {
 		var widget = null;
+
+		var uwDomain = new URL(document.querySelector("head script").src).host;
+		
 		
 		var wv = document.querySelector("#widget-version");
-		wv.textContent = "UW Version: " + cloudinary.WIDGET_VERSION;
+		wv.textContent = "UW Version: " + cloudinary.WIDGET_VERSION + " - from: " + uwDomain;
 
 		var config = {
-			cloudName: "hzxyensd5",
-			uploadPreset: "aoh4fpwm",
+			cloudName: "yoav",
+			uploadPreset: "uw_unsigned",
 			googleApiKey: "AIzaSyAugh8ddeFTt5ckj9rFcRKNHxem18hKiRo",
 			secure: true,
-			folder: "uw2-public-demo-app",
 			showAdvancedOptions: true,
 			searchBySites: "all",
 			searchByRights: true,
