@@ -34,7 +34,13 @@
 <body>
 
 <button id="open-uw">Open</button>
+<br>
+<button id="destroy-uw">Destroy</button>
 
+<div id="thumbs">
+	
+</div>
+	
 <footer>
     <div id="widget-version">loading...</div>
 </footer>
@@ -70,7 +76,8 @@
 				folder: "uw2-public-demo-app",
 				showAdvancedOptions: true,
 				searchBySites: "all",
-				searchByRights: true
+				searchByRights: true,
+				thumbnails: "#thumbs",
 			};
 
 			if (isStaging) {
@@ -96,7 +103,7 @@
 				});
 		}
 
-		var script = document.createElement("script");
+		const script = document.createElement("script");
 		script.onload = onCloudinaryLoaded;
 		script.src = isDev ? getLocalHost() + "/global/all.js" :
 			isProd ? "https://widget.cloudinary.com/v2.0/global/all.js" : 
@@ -104,7 +111,14 @@
 			"https://widget.cloudinary.com/v2.0/next/global/all.js";
 
 		document.head.appendChild(script);
-
+		
+		window.getElementById("destroy-uw")
+			.addEventListener("click", () => {
+				if (widget && !widget.isDestroyed()) {
+					widget.destroy({ removeThumbnails: true });
+				}
+			});
+		
 	})();
 
 </script>
