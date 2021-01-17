@@ -112,7 +112,7 @@
 
 		document.head.appendChild(script);
 		
-		window.getElementById("destroy-uw")
+		document.getElementById("destroy-uw")
 			.addEventListener("click", () => {
 				if (widget && !widget.isDestroyed()) {
 					widget.destroy({ removeThumbnails: true });
