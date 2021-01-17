@@ -69,8 +69,8 @@
 			wv.textContent = "UW Version: " + cloudinary.WIDGET_VERSION;
 
 			var config = {
-				cloudName: "hzxyensd5",
-				uploadPreset: "aoh4fpwm",
+				cloudName: localStorage.getItem("cloud") || "hzxyensd5",
+				uploadPreset: localStorage.getItem("preset") || "aoh4fpwm",
 				googleApiKey: "AIzaSyAugh8ddeFTt5ckj9rFcRKNHxem18hKiRo",
 				secure: true,
 				folder: "uw2-public-demo-app",
