@@ -106,9 +106,9 @@
 		const script = document.createElement("script");
 		script.onload = onCloudinaryLoaded;
 		script.src = isDev ? getLocalHost() + "/global/all.js" :
-			isProd ? "https://upload-widget.cloudinary.com/global/all.js" : 
+			isProd ? "https://widget.cloudinary.com/global/all.js" : 
 		        isStaging ? "https://upload-widget-staging.cloudinary.com/global/all.js" : 
-			"https://upload-widget.cloudinary.com/global/all.js";
+			"https://widget.cloudinary.com/global/all.js";
 
 		document.head.appendChild(script);
 		
