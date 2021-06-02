@@ -82,12 +82,12 @@
 //         newTlsDomain: true,
 			};
 
-			if (isStaging) {
+// 			if (isStaging) {
 				//config.cloudName = "yoav";
 				//config.uploadPreset = "uw_usigned";
-				config.staging  = true; //widgetHost = "https://widget-staging.cloudinary.com/"
-			}
-			else if (isDev) {
+// 				config.staging  = true; //widgetHost = "https://widget-staging.cloudinary.com/"
+// 			}
+			if (isDev) {
 				config.cloudName = "yoav";
 				config.uploadPreset = "uw_usigned";
 				config.secureDistribution = "res-dev.cloudinary.com";
