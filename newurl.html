@@ -58,7 +58,7 @@
 		function getLocalHost() {
 			if (!localDomain) {
 				var m = /domain=([\w\d]*)/.exec(document.location.search);
-				localDomain = m && m[1] ? "https://" + m[1] + ".ngrok.io" : "http://localhost:9990";
+				localDomain = m && m[1] ? "https://" + m[1] + ".ngrok.io" : "https://localhost:9990";
 			}
 
 			return localDomain
