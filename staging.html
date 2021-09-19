@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Yoav's UW2 Test Page</title>
+
+    <!--    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.js"></script> -->
+    <!--<script src="https://widget.cloudinary.com/v2.0/next/global/all.js" ></script>-->
+
+    <style type="text/css">
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 2px;
+            left: 1px;
+        }
+
+        button {
+            margin: 20px;
+            padding: 10px;
+        }
+
+		#instructions {
+			font-size: 22px;
+			font-weight: bold;
+			margin-bottom: 20px;			
+		}
+
+		.error {
+			color: red;
+		}
+    </style>
+</head>
+
+
+<body>
+<p id="instructions">
+	You must set local storage item: 'cloud' with your cloud name (you can also set upload preset with 'preset')
+	<br/>
+	If you havent added yet, add to local storage (using dev tools) and then refresh
+</p>
+
+<button id="open-uw">Open</button>
+<br>
+<button id="destroy-uw">Destroy</button>
+
+<div id="thumbs">
+	
+</div>
+	
+<footer>
+    <div id="widget-version">loading...</div>
+</footer>
+
+<script>
+	//!!!!!!! intentionally using es5 to check old browsers too !!!!!!!!!!!
+
+	(function () {
+		var widget = null;
+		       
+		if (!localStorage.getItem("cloud")) {
+				document.getElementById("instructions").classList.add("error");
+				throw new Error("missing cloud name LS flag");
+		}
+
+		localStorage.setItem("env", "staging");
+
+// 		function getLocalHost() {
+// 			if (!localDomain) {
+// 				var m = /domain=([\w\d]*)/.exec(document.location.search);
+// 				localDomain = m && m[1] ? "https://" + m[1] + ".ngrok.io" : "https://localhost:9991";
+// 			}
+
+// 			return localDomain
+// 		}
+
+		function onCloudinaryLoaded() {
+			var wv = document.querySelector("#widget-version");
+			wv.textContent = "UW Version: " + cloudinary.WIDGET_VERSION;
+
+			var config = {
+				cloudName: localStorage.getItem("cloud") || "hzxyensd5",
+				uploadPreset: localStorage.getItem("preset") || "aoh4fpwm",
+				googleApiKey: "AIzaSyAugh8ddeFTt5ckj9rFcRKNHxem18hKiRo",
+				secure: true,
+				folder: "uw2-public-demo-app",
+				showAdvancedOptions: true,
+				searchBySites: "all",
+				searchByRights: true,
+				thumbnails: "#thumbs",
+        cropping: true,
+//         newTlsDomain: true,
+			};
+
+// 			if (isStaging) {
+				//config.cloudName = "yoav";
+				//config.uploadPreset = "uw_usigned";
+// 				config.staging  = true; //widgetHost = "https://widget-staging.cloudinary.com/"
+// 			}
+// 			if (isDev) {
+// 				config.cloudName = "yoav";
+// 				config.uploadPreset = "uw_usigned";
+// 				config.secureDistribution = "res-dev.cloudinary.com";
+// 				config.dev = true;
+// // 				config.widgetHost =  //getLocalHost();
+// 			}	
+
+			widget = cloudinary.openUploadWidget(config);
+
+			document.querySelector("#open-uw")
+				.addEventListener("click", function () {
+					if (widget) {
+						widget.open();
+					}
+				});
+		}
+
+		const script = document.createElement("script");
+		script.onload = onCloudinaryLoaded;
+		script.src = 	"https://upload-widget-staging.cloudinary.com/global/all.js";
+
+		document.head.appendChild(script);
+		
+		document.getElementById("destroy-uw")
+			.addEventListener("click", function() {
+				if (widget && !widget.isDestroyed()) {
+					widget.destroy({ removeThumbnails: true });
+				}
+			});
+		
+	})();
+
+</script>
+
+</body>
+</html>
