@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Yoav's MEW Test Page</title>
+
+    <script src="https://media-editor.cloudinary.com/1.12.14/all.js" ></script>
+
+    <style type="text/css">
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 2px;
+            left: 1px;
+        }
+
+        button {
+            margin: 20px;
+            padding: 10px;
+        }
+
+		#instructions {
+			font-size: 22px;
+			font-weight: bold;
+			margin-bottom: 20px;			
+		}
+
+		.error {
+			color: red;
+		}
+    </style>
+</head>
+
+ 
+<body>
+	<div id="wrapper" style="display: inline"></div>
+
+<script>
+	(function () {
+		let widget = null;
+
+		let widget = window.cloudinary.mediaEditor({
+        appendTo: '#wrapper',
+      });
+
+
+		console.log(widget.getVersion());
+
+		
+	})();
+
+</script>
+
+</body>
+</html>
