@@ -45,8 +45,6 @@
 
 <script>
 	(function () {
-		let widget = null;
-
 		let widget = window.cloudinary.mediaEditor({
         appendTo: '#wrapper',
       });
@@ -54,6 +52,7 @@
 
 		console.log(widget.getVersion());
 
+        widget.show();
 		
 	})();
 
