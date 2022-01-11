@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>Yoav's UW2 Test Page</title>
 
-    <!--    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.js"></script> -->
-    <!--<script src="https://widget.cloudinary.com/v2.0/next/global/all.js" ></script>-->
 	<script src="https://upload-widget.cloudinary.com/2.0.44/global/all.js"></script>
 	
     <style type="text/css">
@@ -34,37 +32,24 @@
 
 <body>
 
-<button id="open-uw">Open</button>
-<br>
-<button id="destroy-uw">Destroy</button>
+	<button id="open-uw">Open</button>
+	<br>
+	<button id="destroy-uw">Destroy</button>
 
-<div id="thumbs">
-	
-</div>
-	
-<footer>
-    <div id="widget-version">loading...</div>
-</footer>
+	<div id="thumbs">
+		
+	</div>
+		
+	<footer>
+		<div id="widget-version">loading...</div>
+	</footer>
 
 
 <script>
 	//!!!!!!! intentionally using es5 to check old browsers too !!!!!!!!!!!
 	(function () {
 		var widget = null;
-		    //     isProd = ~document.location.search.indexOf("prod"),
-		    //     isStaging = ~document.location.search.indexOf("staging"),
-			// isDev = ~document.location.search.indexOf("dev"),
-			// localDomain = null;
-
-		// function getLocalHost() {
-		// 	if (!localDomain) {
-		// 		var m = /domain=([\w\d]*)/.exec(document.location.search);
-		// 		localDomain = m && m[1] ? "https://" + m[1] + ".ngrok.io" : "https://localhost:9991";
-		// 	}
-
-		// 	return localDomain
-		// }
-
+		
 		function onCloudinaryLoaded() {
 			var wv = document.querySelector("#widget-version");
 			wv.textContent = "UW Version: " + cloudinary.WIDGET_VERSION;
