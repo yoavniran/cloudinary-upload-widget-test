@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Yoav's UW2 Test Page</title>
+
+    <script src="https:/upload-widget.cloudinary.com/global/all.js" crossorigin="anonymous" ></script>
+
+    <style type="text/css">
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 2px;
+            left: 1px;
+        }
+
+        button {
+            margin: 20px;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+
+<body>
+
+<button id="open-uw">Open</button>
+<br>
+<button id="destroy-uw">Destroy</button>
+
+<div id="thumbs">
+	
+</div>
+	
+<footer>
+    <div id="widget-version">loading...</div>
+</footer>
+
+
+<script>
+	//!!!!!!! intentionally using es5 to check old browsers too !!!!!!!!!!!
+	(function () {
+		var widget = null,
+		        isProd = ~document.location.search.indexOf("prod"),
+		        isStaging = ~document.location.search.indexOf("staging"),
+			isDev = ~document.location.search.indexOf("dev"),
+			localDomain = null;
+
+		function getLocalHost() {
+			if (!localDomain) {
+				var m = /domain=([\w\d]*)/.exec(document.location.search);
+				localDomain = m && m[1] ? "https://" + m[1] + ".ngrok.io" : "http://localhost:9990";
+			}
+
+			return localDomain
+		}
+
+		function onCloudinaryLoaded() {
+			var wv = document.querySelector("#widget-version");
+			wv.textContent = "UW Version: " + cloudinary.WIDGET_VERSION;
+
+			var config = {
+				cloudName: localStorage.getItem("cloud") || "hzxyensd5",
+				uploadPreset: localStorage.getItem("preset") || "aoh4fpwm",
+				googleApiKey: "AIzaSyAugh8ddeFTt5ckj9rFcRKNHxem18hKiRo",
+				secure: true,
+				folder: "uw2-public-demo-app",
+				showAdvancedOptions: true,
+				searchBySites: "all",
+				searchByRights: true,
+				thumbnails: "#thumbs",
+			};
+
+			if (isStaging) {
+				//config.cloudName = "yoav";
+				//config.uploadPreset = "uw_usigned";
+				config.staging  = true; //widgetHost = "https://widget-staging.cloudinary.com/"
+			}
+			else if (isDev) {
+				config.cloudName = "yoav";
+				config.uploadPreset = "uw_usigned";
+				config.secureDistribution = "res-dev.cloudinary.com";
+				// config.dev = true;
+				config.widgetHost = getLocalHost();
+			}	
+
+			widget = cloudinary.openUploadWidget(config);
+
+			document.querySelector("#open-uw")
+				.addEventListener("click", function () {
+					if (widget) {
+						widget.open();
+					}
+				});
+		}
+
+		onCloudinaryLoaded();
+		// const script = document.createElement("script");
+		// script.onload = onCloudinaryLoaded;
+		// script.src = isDev ? getLocalHost() + "/global/all.js" :
+		// 	isProd ? "https://widget.cloudinary.com/v2.0/global/all.js" : 
+		//         isStaging ? "https://upload-widget-staging.cloudinary.com/global/all.js" : 
+		// 	"https://widget.cloudinary.com/v2.0/global/all.js";
+
+		// document.head.appendChild(script);
+		
+		document.getElementById("destroy-uw")
+			.addEventListener("click", () => {
+				if (widget && !widget.isDestroyed()) {
+					widget.destroy({ removeThumbnails: true });
+				}
+			});
+		
+	})();
+
+</script>
+
+</body>
+</html>
